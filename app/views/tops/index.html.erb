@@ -7,7 +7,18 @@
   <br>
   <% @shops.each do |shop| %>
     <%= shop.name %>
+
+    <% if @shop_ids.include?(shop.id) %>
+      <br>
+      <%= link_to "チャットへ", room_path(current_user.rooms.find_by(shop_id: shop.id)) %><br>
+    <% else %>
+      <%= form_for Room.new do |f| %>
+        <%= f.hidden_field :shop_id, :value => shop.id %>
+        <%= f.submit %>
+      <% end %>
+    <% end %>
   <% end %>
+
 <% elsif shop_signed_in? %>
   ~<%= current_shop.name %>がログインしてます~
   <%= link_to "ログアウト", destroy_shop_session_path ,:method => :delete %>
@@ -16,6 +27,15 @@
   <br>
   <% @users.each do |user| %>
     <%= user.name %>
+    <% if @user_ids.include?(user.id) %>
+      <br>
+      <%= link_to "チャットへ", room_path(current_shop.rooms.find_by(user_id: user.id)) %><br>
+    <% else %>
+      <%= form_for Room.new do |f| %>
+        <%= f.hidden_field :user_id, :value => user.id %>
+        <%= f.submit %>
+      <% end %>
+    <% end %>
   <% end %>
 <% else %>
   <h3>ユーザー</h3>
