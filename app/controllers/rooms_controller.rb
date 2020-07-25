@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
     if user_signed_in?
       if @room.user.id == current_user.id
         @shop = @room.shop
+        @user = current_user 
       else
         redirect_to "/"
       end

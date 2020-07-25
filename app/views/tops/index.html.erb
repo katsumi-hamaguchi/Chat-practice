@@ -3,7 +3,7 @@
   ~<%= current_user.name %>がログインしてます~
   <%= link_to "ログアウト", destroy_user_session_path ,:method => :delete %>
   <br>
-  <h2>ショップ一覧</h2>
+  <h2>ショップ一覧（表示件数<%= @shops.count %>店舗）</h2>
   <br>
   <% @shops.each do |shop| %>
     <%= shop.name %>
@@ -23,7 +23,7 @@
   ~<%= current_shop.name %>がログインしてます~
   <%= link_to "ログアウト", destroy_shop_session_path ,:method => :delete %>
   <br>
-  <h2>ユーザー一覧</h2>
+  <h2>ユーザー一覧（表示件数<%= @users.count %>人）</h2>
   <br>
   <% @users.each do |user| %>
     <%= user.name %>
